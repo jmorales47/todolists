@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>To Do List</title>
+		<style>
+			body{
+				background: #ddd;
+				font-family: 'Arial'
+			}
+			main{				
+				background: #fff;
+				width: 60%;
+				margin: auto;
+				padding: 20px;
+				border-radius: 3px;
+			}
+
+			.btn{
+				border-radius: 2px;	
+				border: 2px solid #ddd;				
+				padding: 4px 5px;
+				background: #fff;
+				cursor: pointer;
+				height: 32px;	
+				vertical-align: bottom;	
+			}		
+
+			
+			.btn:hover{
+				background: #ddd;				
+			}
+
+			#btn-agregar{
+				background: #1c6dba;
+				color: white;
+				padding: 0px 15px;
+				border: 0px;	
+				width: 15%;					
+			}
+
+			#btn-agregar:hover{
+				background: #094782;			
+			}
+
+			#lista-vacia{				
+				width: 90%;
+				background: #eee;
+				padding: 15px 10px;
+				border-radius: 3px;
+				margin-top: 15px;
+				font-weight: bold;
+				color: #555;
+			}
+
+			.texto{
+				width: 80%;
+				border: 1px solid #ccc;
+				border-radius: 3px;
+				height: 32px;
+				padding: 0px 3px;
+			}
+
+			.task{
+				width: 80%;
+				float: left;
+				height: 32px;					
+			}
+
+			.task p{
+				vertical-align: bottom;
+			}
+
+			ul{
+				background: #eee;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border-radius: 3px;
+			}
+			ul li{
+				padding-top: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>To Do List</h1>
+			<form @submit.prevent="add" style="width: 100%">
+				<input  class="texto" type="text" v-model="task" placeholder="Escribe una tarea" required>
+				<input id="btn-agregar" class="btn" type="submit" value="Agregar">
+			</form>			
+			<ul v-if="tasks.length > 0">
+				<li v-for="(t, index) in tasks">							
+					<span v-if="index == toEdit">						
+						<form @submit.prevent="editTask(index)">
+							<input class="texto" type="text" v-model="taskEdit" placeholder="Escribe una tarea" required>
+							<button class="btn" type="submit">
+								<img src="./img/icon-disk.svg">
+							</button>			
+						</form>
+					</span>
+					<span v-else>
+						<div class="task">
+							<p>{{ t }}</p>
+						</div>
+						<button class="btn" type="button" @click="showEdit(index)">
+							<img src="./img/icon-pen.svg">
+						</button>
+						<button class="btn" type="button" @click="deleteTask(index)">
+							<img src="./img/icon-trash.svg">
+						</button>
+					</span>
+				</li>
+			</ul>		
+			<div id="lista-vacia" v-else>No has agregado tareas</div>	
+		</main>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
