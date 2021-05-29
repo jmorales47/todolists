@@ -1,2 +1,2 @@
-# todolists
-Exercise of a To Do List with Vue JS
+# To do list
+A simple to do list just for practicing Vue JS framework
